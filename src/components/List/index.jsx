@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Profile from "../Profile";
 import './list.module.css';
 
-const UserForm = () => {
+const UserForm = (props) => {
 
 
     const [counter, setCounter] = useState(0)
@@ -9,18 +11,11 @@ const UserForm = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [studentList, setStudentList] = useState([])
 
+    const navigate = useNavigate()
+    
 
-    const incrementHandler = () => {
-        setCounter(counter + 1)
-    }
-
-    const decrementHandler = () => {
-        setCounter(counter - 1)
-    }
-
-    const submitHandler = event => {
+    const submitHandler = async event => {
 
         event.preventDefault()
 
@@ -30,14 +25,25 @@ const UserForm = () => {
             password
         }
 
-        setStudentList( prevStudentList => [...prevStudentList, student] )
+        const studentResponse = await fetch('http://localhost:8000/student', {
+
+            method: "POST",
+            body: JSON.stringify(student),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+
+        })
+        if(studentResponse.status === 200){
+            const parsedResponse = await studentResponse.json()
+            props.setStudent(parsedResponse.data)
+            navigate('/profile')
+        }
+        
 
     }
 
     return <div>
-        <button onClick={incrementHandler} > Inc </button>
-        <span> Counter:- {counter} </span>
-        <button onClick={decrementHandler} > Dec </button>
 
         <form onSubmit={submitHandler} >
 
@@ -70,8 +76,6 @@ const UserForm = () => {
 
         </form>
 
-        <h3> Students List:- </h3>
-        <UsersList students={studentList} />
     </div>
 
 }

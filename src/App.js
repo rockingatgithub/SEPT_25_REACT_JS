@@ -3,30 +3,29 @@ import { Link, Route, Routes } from 'react-router-dom';
 import Clock from './components/Clock';
 import List from './components/List'
 import Login from './components/Login';
+import Profile from './components/Profile';
 
 function App() {
 
-  const [clockToggle, setClockToggle] = useState(false)
+  const [student, setStudent] = useState({})
 
   return (
     <div className="App">
         <h1> Introduction to ReactJS </h1>
-        {/* <h3>Students List</h3> */}
-        {/* <button onClick={ () => setClockToggle( prevToggle => !prevToggle )  } > Toggle Clock </button>
-        { clockToggle && <Clock/>} */}
+  
 
         <div>
           <Link to='/login' > Login </Link>
           <Link to='/clock' > Clock </Link>
           <Link to='/list' > List </Link>
-
         </div>
 
         <Routes>
 
           <Route path='/login' element={<Login/>}  />
           <Route path='/clock' element={<Clock/>}  />
-          <Route path='/list' element={<List/>} />
+          <Route path='/list' element={<List setStudent={setStudent} />} />
+          <Route path='/profile' element={<Profile student={student} />} />
 
         </Routes>
         {/* <List/>
