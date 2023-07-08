@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { Link, Route, Routes } from 'react-router-dom';
+import Clock from './components/Clock';
+import List from './components/List'
+import Login from './components/Login';
 
 function App() {
+
+  const [clockToggle, setClockToggle] = useState(false)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <h1> Introduction to ReactJS </h1>
+        {/* <h3>Students List</h3> */}
+        {/* <button onClick={ () => setClockToggle( prevToggle => !prevToggle )  } > Toggle Clock </button>
+        { clockToggle && <Clock/>} */}
+
+        <div>
+          <Link to='/login' > Login </Link>
+          <Link to='/clock' > Clock </Link>
+          <Link to='/list' > List </Link>
+
+        </div>
+
+        <Routes>
+
+          <Route path='/login' element={<Login/>}  />
+          <Route path='/clock' element={<Clock/>}  />
+          <Route path='/list' element={<List/>} />
+
+        </Routes>
+        {/* <List/>
+        <Login/> */}
     </div>
   );
 }
