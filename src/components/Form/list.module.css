@@ -1,0 +1,18 @@
+table, td {
+    border: 1px solid black;
+}
+
+form {
+    width: 50%;
+    margin: auto;
+}
+
+.formButton {
+    display: block;
+    margin: auto;
+    margin-top: 16px;
+}
+
+h1 {
+    text-align: center;
+}

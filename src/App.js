@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import Clock from './components/Clock';
-import List from './components/List'
+import Form from './components/Form'
 import Login from './components/Login';
 import Profile from './components/Profile';
 
@@ -11,25 +11,24 @@ function App() {
 
   return (
     <div className="App">
-        <h1> Introduction to ReactJS </h1>
-  
 
         <div>
-          <Link to='/login' > Login </Link>
+          <Link to='/signin' > Signin </Link>
+          <Link to='/signup' > Signup </Link>
           <Link to='/clock' > Clock </Link>
-          <Link to='/list' > List </Link>
         </div>
 
         <Routes>
 
-          <Route path='/login' element={<Login/>}  />
           <Route path='/clock' element={<Clock/>}  />
-          <Route path='/list' element={<List setStudent={setStudent} />} />
-          <Route path='/profile' element={<Profile student={student} />} />
+          <Route path='/signin' element={<Form setStudent={setStudent} />}>
+            {/* Below route shows how to include params in a react route. */}
+            {/* <Route path=':id' element={<List setStudent={setStudent} />} ></Route> */}
+          </Route>
+          <Route path='/signup' element={<Form signup setStudent={setStudent} />}/>
+          <Route path='/profile' element={<Profile student={student} setStudent={setStudent} />} />
 
         </Routes>
-        {/* <List/>
-        <Login/> */}
     </div>
   );
 }
