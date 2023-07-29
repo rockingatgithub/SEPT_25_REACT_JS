@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import { connect } from 'react-redux'
 import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
@@ -9,7 +10,7 @@ const Profile = (props) => {
     const onFormSubmit = async event => {
         event.preventDefault()
 
-        const response = await fetch('http://localhost:8000/student/'+ props.student._id, {
+        const response = await fetch('http://localhost:8000/student/'+ props.main.user._id, {
             method: 'PUT',
             body: JSON.stringify({
                 name: newName,
@@ -22,7 +23,7 @@ const Profile = (props) => {
 
         if(response.status === 200) {
             const parsedResponse = await response.json()
-            props.setStudent(parsedResponse.data)
+            // props.setStudent(parsedResponse.data)
             console.log(parsedResponse)
         }
 
@@ -32,14 +33,14 @@ const Profile = (props) => {
         <h1> Profile:- </h1>
 
         <div id="profile" >
-            <div> Name:- {props.student.name} </div>
-            <div> Email:- {props.student.email} </div>
+            <div> Name:- {props.main.user.name} </div>
+            <div> Email:- {props.main.user.email} </div>
 
             Update Form:- 
             <Form onSubmit={onFormSubmit} >
             <Form.Group>
                     <Form.Label> Current Name </Form.Label>
-                    <Form.Control value={props.student.name} disabled />
+                    <Form.Control value={props.main.user.name} disabled />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label> New Name </Form.Label>
@@ -55,4 +56,8 @@ const Profile = (props) => {
 
 }
 
-export default Profile
+const mapStateToProps = state => {
+    return { main: state }
+}
+
+export default connect(mapStateToProps)(Profile)

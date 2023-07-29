@@ -5,76 +5,36 @@ import Cookie from 'js-cookie'
 import classes from './list.module.css';
 // import  {Button}  from "react-bootstrap";
 import  Button  from "react-bootstrap/Button";
+import { useDispatch } from "react-redux";
+import { signinFunction, signupFunction } from "../../actions";
 
 
 const UserForm = (props) => {
-
-    const params = useParams()
-    console.log(params)
-
-    const [counter, setCounter] = useState(0)
-
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     
 
     const signupHandler = async event => {
-
         event.preventDefault()
-
         const student = {
             name,
             email,
             password
         }
-
-        const studentResponse = await fetch('http://localhost:8000/student', {
-
-            method: "POST",
-            body: JSON.stringify(student),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-
-        })
-        if(studentResponse.status === 200){
-            const parsedResponse = await studentResponse.json()
-            props.setStudent(parsedResponse.data)
-            navigate('/profile')
-        }
-        
-
+        dispatch(signupFunction(student, navigate))
     }
 
     const signinHandler = async event => {
-
         event.preventDefault()
-
         const student = {
             email,
             password
         }
-
-        const studentResponse = await fetch('http://localhost:8000/auth', {
-
-            method: "POST",
-            body: JSON.stringify(student),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-
-        })
-        if(studentResponse.status === 200){
-            const parsedResponse = await studentResponse.json()
-            props.setStudent(parsedResponse.user)
-            Cookie.set('user', parsedResponse.token)
-            navigate('/profile')
-        }
-        
-
+        dispatch(signinFunction(student, navigate))
     }
 
     const submitHandler = props.signup ? signupHandler : signinHandler
