@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/SEPT_25_REACT_JS/static/css/main.94788d0e.css",
+    "main.js": "/SEPT_25_REACT_JS/static/js/main.31dbafa0.js",
+    "index.html": "/SEPT_25_REACT_JS/index.html",
+    "main.94788d0e.css.map": "/SEPT_25_REACT_JS/static/css/main.94788d0e.css.map",
+    "main.31dbafa0.js.map": "/SEPT_25_REACT_JS/static/js/main.31dbafa0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.94788d0e.css",
+    "static/js/main.31dbafa0.js"
+  ]
+}
