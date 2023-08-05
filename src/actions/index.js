@@ -19,7 +19,7 @@ export const signupFunction = (student, navigate) => {
             const parsedResponse = await studentResponse.json()
             navigate('/profile')
 
-            dispatch({ type: 'SIGNUP', data: parsedResponse.user })
+            dispatch({ type: 'SIGNUP', data: parsedResponse.data })
         }
     
     }

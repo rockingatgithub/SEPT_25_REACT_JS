@@ -6,6 +6,7 @@ import Clock from './components/Clock';
 import Form from './components/Form'
 import Login from './components/Login';
 import Profile from './components/Profile';
+import { UserContext } from './context';
 
 function App(props) {
   return (
@@ -25,7 +26,11 @@ function App(props) {
             {/* <Route path=':id' element={<List setStudent={setStudent} />} ></Route> */}
           </Route>
           <Route path='/signup' element={<Form signup />}/>
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile' element={
+            <UserContext.Provider value={{ name: "ReactDOM", version: "18.0.2" }} >
+              <Profile />
+            </UserContext.Provider>
+          } />
 
         </Routes>
     </div>
